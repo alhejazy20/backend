@@ -100,3 +100,32 @@ server.get('/Data_2',(req,res)=>{
 //       }
 //     });
 //   });
+
+
+
+
+
+
+
+server.delete('/deletAll',(req,res)=>{
+    todo.deleteMany({isCompleted:true})
+
+
+
+})
+
+
+server.delete("/tasks", (req, res) => {
+    // console.log("37:", req.params.id);
+  
+    todo.deleteMany({ isCompleted: true }, (err, deleteObj) => {
+      if (err) {
+        console.log("ERROR: ", err);
+      } else {
+        console.log(deleteObj);
+        deleteObj.deletedCount === 0
+          ? res.status(404).json("There is no completed todo found")
+          : res.json("Delete all completed todos successfully");
+      }
+    });
+  });
